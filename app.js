@@ -54,7 +54,7 @@ window.onload = function () {
 
   requestAnimationFrame(update);
 
-  setInterval(placePipes, 1500); //1.5seconds
+  setInterval(placePipes, 1000); //1 second
 
   document.addEventListener("keydown", moveBird);
 };
