@@ -32,6 +32,7 @@ let gravity = 0.4;
 let gameover = false;
 
 let score = 0;
+let highscore = 0;
 
 window.onload = function () {
   board = document.getElementById("board");
@@ -54,7 +55,7 @@ window.onload = function () {
 
   requestAnimationFrame(update);
 
-  setInterval(placePipes, 1000); //1.5seconds
+  setInterval(placePipes, 1500); //1.5seconds
 
   document.addEventListener("keydown", moveBird);
   document.addEventListener("touchstart", moveBird);
@@ -99,12 +100,19 @@ function update() {
     pipeArray.shift();
   }
 
-  context.fillStyle = "white";
+  context.fillStyle = "black";
   context.font = "45px sans-serif";
-  context.fillText(score, 5, 45);
+  context.fillText("Score:", 5, 45);
+  context.fillStyle = "white";
+  context.fillText(score, 145, 45);
+  context.fillStyle = "black";
+  context.fillText("High Score: ", 5, 90);
+  context.fillStyle = "white";
+  context.fillText(highscore, 250, 90);
 
   if (gameover) {
-    context.fillText("GAME OVER!", 5, 90);
+    context.fillStyle = "red";
+    context.fillText("GAME OVER!", 5, 135);
   }
 }
 function placePipes() {
@@ -149,6 +157,9 @@ function moveBird(e) {
     if (gameover) {
       bird.y = birdY;
       pipeArray = [];
+      if (score > highscore) {
+        highscore = score;
+      }
       score = 0;
       gameover = false;
     }
