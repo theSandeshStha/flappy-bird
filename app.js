@@ -54,9 +54,10 @@ window.onload = function () {
 
   requestAnimationFrame(update);
 
-  setInterval(placePipes, 1000); //1 second
+  setInterval(placePipes, 1000); //1.5seconds
 
   document.addEventListener("keydown", moveBird);
+  document.addEventListener("touchstart", moveBird);
 };
 
 function update() {
@@ -72,7 +73,7 @@ function update() {
   context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
   // if bird touches ground
-  if (bird.y > board.height) {
+  if (bird.y + 24 > board.height) {
     gameover = true;
   }
 
@@ -140,7 +141,7 @@ function moveBird(e) {
     e.code == "Space" ||
     e.code == "ArrowUp" ||
     e.code == "KeyX" ||
-    e.code == "ontouchstart"
+    e.type === "touchstart"
   ) {
     velocityY = -6; //jump
 
