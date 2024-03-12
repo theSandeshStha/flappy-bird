@@ -55,7 +55,7 @@ window.onload = function () {
 
   requestAnimationFrame(update);
 
-  setInterval(placePipes, 1000); //1.5seconds
+  setInterval(placePipes, 1500); //1.5seconds
 
   document.addEventListener("keydown", moveBird);
   document.addEventListener("touchstart", moveBird);
