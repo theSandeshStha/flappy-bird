@@ -55,7 +55,7 @@ window.onload = function () {
 
   requestAnimationFrame(update);
 
-  setInterval(placePipes, 1500); //1.5seconds
+  setInterval(placePipes, 1000); //1.5seconds
 
   document.addEventListener("keydown", moveBird);
   document.addEventListener("touchstart", moveBird);
@@ -71,7 +71,27 @@ function update() {
   //Bird
   velocityY += gravity;
   bird.y = Math.max(bird.y + velocityY, 0); // limit bird to top of the canvas
-  context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+
+  // Calculate rotation angle based on velocityY
+  let rotationAngle = Math.min(+90, Math.max(-90, velocityY * 8));
+
+  // Translate to the bird's center
+  context.translate(bird.x + bird.width / 2, bird.y + bird.height / 2);
+
+  // Rotate the context
+  context.rotate((rotationAngle * Math.PI) / 180);
+
+  // Draw the bird
+  context.drawImage(
+    birdImg,
+    -bird.width / 2,
+    -bird.height / 2,
+    bird.width,
+    bird.height
+  );
+
+  // Reset the transformations
+  context.setTransform(1, 0, 0, 1, 0, 0);
 
   // if bird touches ground
   if (bird.y + 24 > board.height) {
