@@ -171,7 +171,7 @@ function moveBird(e) {
     e.code == "KeyX" ||
     e.type === "touchstart"
   ) {
-    velocityY = -7; //jump
+    velocityY = -9; //jump
 
     //reset game
     if (gameover) {
